@@ -40,16 +40,39 @@ public class AlienController {
     	
     }
   
+    AlienDictionary ad = new AlienDictionary();
     
     @FXML
     void doTranslate(ActionEvent event) {
-    	    	
+    	    String parolaIns = txtWord.getText();
+    	    if(parolaIns==null) {
+    	    		return;
+    	    }
+    	    
+    	    if(!parolaIns.matches("[a-zA-Z ]*")){
+    	    		txtResult.appendText("\nInserire solo caratteri alfabetici.");
+    	    }
+  // else {
+    	    	if(parolaIns.contains(" ")) {
+    	    		String parole[] = parolaIns.split(" ");
+    	    		ad.addWord(parole[0], parole[1]);
+    	    		txtResult.appendText("\nHai aggiunto "+parole[0]+" "+parole[1]+" al dizionario.");
+    	    	}
+    	    	else {
+    	        if(ad.translateWord(parolaIns)!=null) {
+    	    		txtResult.appendText("\nTraduzione: "+ad.translateWord(parolaIns));
+    	      } else {
+    	    		txtResult.appendText("\nLa parola inserita non e' presente nel dizionario.");
+    	          }
+    	    }
+   //}
+ 
     }
-    
     
     @FXML
     void doReset(ActionEvent event) {
-
+    		txtResult.setText("Welcome to Alien Dictionary 2017.");
     }
     
+  
 }
