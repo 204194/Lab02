@@ -30,7 +30,7 @@
             <HBox spacing="10.0">
                <children>
                   <Label text="Alien Text" />
-                  <TextField fx:id="txtWord" onAction="#doTranslate" promptText="Insert the text..." />
+                  <TextField fx:id="txtWord" promptText="Insert the text..." />
                   <Button fx:id="btnTranslate" mnemonicParsing="false" onAction="#doTranslate" text="Translate" />
                </children>
                <VBox.margin>

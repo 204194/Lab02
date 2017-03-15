@@ -60,7 +60,7 @@ public class AlienController {
     	    	}
     	    	else {
     	        if(ad.translateWord(parolaIns)!=null) {
-    	    		txtResult.appendText("\nTraduzione: "+ad.translateWord(parolaIns));
+    	    		txtResult.appendText("\nTraduzione: \n"+ad.translateWord(parolaIns));
     	      } else {
     	    		txtResult.appendText("\nLa parola inserita non e' presente nel dizionario.");
     	          }

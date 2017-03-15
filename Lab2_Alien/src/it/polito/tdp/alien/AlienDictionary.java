@@ -3,8 +3,9 @@ import java.util.*;
 
 public class AlienDictionary {
 	private List<World> dizionario = new LinkedList<World>();
+	private List<WordEnhanced> dizionarioEn = new LinkedList<WordEnhanced>();
 	
-	public void addWord(String alienWord, String translation){
+	/*public void addWord(String alienWord, String translation){
 		boolean trovata = false;
 		for(World wtemp: dizionario) {
 			if(wtemp.compare(alienWord)!=null){
@@ -19,9 +20,9 @@ public class AlienDictionary {
 	}
 	
 	public String translateWord(String alienWord){
-		/*Il metodo viene chiamato dal Controller per la traduzione della parola alienWord passata
+		Il metodo viene chiamato dal Controller per la traduzione della parola alienWord passata
 come parametro. Il metodo restituisce la parola tradotta, altrimenti null se alienWord non è
-presente nel dizionario.*/
+presente nel dizionario.
 		String traduzione="";
 		boolean trovata = false;
 		for(World wtemp: dizionario) {
@@ -45,5 +46,47 @@ presente nel dizionario.*/
 			}
 		else return false;
 
-}
+}*/
+	public void addWord(String alienWord, String translation){
+		boolean trovata = false;
+		for(WordEnhanced wtemp: dizionarioEn) {
+			if(wtemp.compare(alienWord)!=null){
+				wtemp.addTranslation(translation);
+				trovata = true;
+			} 
+		}
+		if(!trovata && controllaParola(alienWord) && controllaParola(translation)) {
+			WordEnhanced w = new WordEnhanced(alienWord);
+			w.addTranslation(translation);
+			dizionarioEn.add(w);
+		}
+	}
+	
+	public String translateWord(String alienWord){
+		/*Il metodo viene chiamato dal Controller per la traduzione della parola alienWord passata
+come parametro. Il metodo restituisce la parola tradotta, altrimenti null se alienWord non è
+presente nel dizionario.*/
+		String traduzione="";
+		boolean trovata = false;
+		for(WordEnhanced wtemp: dizionarioEn) {
+			if(wtemp.compare(alienWord)!=null){
+				traduzione = wtemp.stampaTraduzioni();
+				trovata = true;
+				break;
+			} 
+		}
+		
+		if(trovata && controllaParola(alienWord)) {
+			return traduzione;
+		} else
+		return null;
+	}
+	
+	
+	public boolean controllaParola(String parola) {
+		if(parola.matches("[a-zA-Z ]*")) {
+			return true;
+			}
+		else return false;
+	}
 }
